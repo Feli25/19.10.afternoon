@@ -21,17 +21,21 @@ var ball = {
   update: function() {
     this.x += this.vx
     this.y += this.vy
-    if(this.x>=width) {
+    if(this.x>=width-this.radius) {
       this.vx -= 2*this.vx
+      this.color = "chartreuse"
     }
-    if(this.x<=0) {
+    if(this.x<=0+this.radius) {
       this.vx += -2*this.vx
+      this.color = "blue"
     }
-    if(this.y>=height) {
+    if(this.y>=height-this.radius) {
       this.vy -= 2*this.vy
+      this.color = "purple"
     }
-    if(this.y<=0) {
+    if(this.y<=0+this.radius) {
       this.vy += -2*this.vy
+      this.color = "red"
     }
   }
 };
@@ -48,4 +52,18 @@ function update() {
 function drawEverything() {
   ctx.clearRect(0, 0, width, height)
   ball.draw()
+}
+
+var buttonin = document.getElementById("inbutton")
+var buttonde = document.getElementById("debutton")
+
+buttonin.onclick = function(){
+  console.log("Increase")
+  ball.vx *= 1.1;
+  ball.vy *= 1.1;
+}
+buttonde.onclick = function(){
+  console.log("Decrease")
+  ball.vx /= 1.1;
+  ball.vy /= 1.1;
 }
